@@ -3,6 +3,7 @@ from PIL import Image
 import string
 import os
 import Reproductor  # Asegúrate de tener la función reproducir() en este módulo
+import MostrarLogo
 
 def lessonSelector(pestanas, datos):
     if "Lecciones" in pestanas._tab_dict:
@@ -10,20 +11,16 @@ def lessonSelector(pestanas, datos):
     pestanas.add("Lecciones")
     frame = pestanas.tab("Lecciones")
 
-    imagen_original = Image.open("assets/LOGOSF.png")
-    imagen_ctk = ctk.CTkImage(light_image=imagen_original, size=(200, 200))
-    ctk.CTkLabel(frame, image=imagen_ctk, text="").place(relx=0.07, rely=0.06, anchor="center")
-    
     usuario = datos["usuario"]
     xp= datos["xp"]
-    ctk.CTkButton(frame, text=f"XP: {xp}", fg_color="#2441D5", hover_color="#2441D5" ).place(relx=.85, rely=.04, anchor="center")
+    MostrarLogo.Logo(frame, datos)
 
-    ctk.CTkLabel(frame, text="Selecciona tu lección:", text_color="#09001D", font=("Soege UI", 30, "bold")).place(relx=.5, rely=.23, anchor="center")
-
+    
+    ctk.CTkLabel(frame, text="¡Selecciona tu lección!", font=("Segoe UI", 35, "bold")).place(relx=.5, rely=.19, anchor="center")
     img1 = Image.open("assets/abecedarioN.png")
     img_ctk1 = ctk.CTkImage(light_image=img1, size=(200, 200))
     ctk.CTkLabel(frame, image=img_ctk1, text="").place(relx=.2, rely=.6, anchor="center")
-    ctk.CTkButton(frame, text="Seleccionar", command=lambda: lesson1(pestanas)).place(relx=.2, rely=.85, anchor="center")
+    ctk.CTkButton(frame, text="Seleccionar", command=lambda: lesson1(pestanas, datos)).place(relx=.2, rely=.85, anchor="center")
 
     img2 = Image.open("assets/palabrasComunesN.png")
     img_ctk2 = ctk.CTkImage(light_image=img2, size=(200, 200))
@@ -36,26 +33,29 @@ def lessonSelector(pestanas, datos):
     ctk.CTkButton(frame, text="Seleccionar").place(relx=.8, rely=.85, anchor="center")
 
 
-def lesson1(pestanas):
+def lesson1(pestanas, datos):
     if "Lección 1" in pestanas._tab_dict:
         pestanas.delete("Lección 1")
+    if "Nivel 1" in pestanas._tab_dict:
+        pestanas.delete("Nivel 1")
     pestanas.add("Lección 1")
     pestanas.set("Lección 1")
     frame = pestanas.tab("Lección 1")
 
-    mostrar_letra(frame, "A")
+    mostrar_letra(frame, "A", datos)
 
 
-def mostrar_letra(frame, letra_actual):
+def mostrar_letra(frame, letra_actual, datos):
     for widget in frame.winfo_children():
         widget.destroy()
 
-    abecedario = list(string.ascii_uppercase)
+    abecedario = list("ABCDEFGHIJKLMNÑOPQRSTUVWXYZ")
     indice = abecedario.index(letra_actual)
 
-    imagen_original = Image.open("assets/LOGOSF.png")
-    imagen_ctk = ctk.CTkImage(light_image=imagen_original, size=(200, 200))
-    ctk.CTkLabel(frame, image=imagen_ctk, text="").place(relx=0.07, rely=0.06, anchor="center")
+    MostrarLogo.Logo(frame, datos)
+    
+    #xp= datos["xp"]
+    #ctk.CTkButton(frame, text=f"XP: {xp}", font=("Segoe UI", 12, "bold"), fg_color="#2441D5", hover_color="#2441D5" ).place(relx=.9, rely=.04, anchor="center")
     
     ctk.CTkLabel(frame, text="¿Listo para aprender el abecedario?", font=("Segoe UI", 30, "bold")).place(relx=0.5, rely=0.05, anchor="center")
     ctk.CTkLabel(frame, text=f"Esta es la letra '{letra_actual}'", font=("Segoe UI", 25)).place(relx=0.5, rely=0.18, anchor="center")
@@ -70,9 +70,9 @@ def mostrar_letra(frame, letra_actual):
 
     if indice > 0:
         letra_anterior = abecedario[indice - 1]
-        ctk.CTkButton(frame, text="← Anterior", command=lambda: mostrar_letra(frame, letra_anterior)).place(relx=0.3, rely=0.9, anchor="center")
+        ctk.CTkButton(frame, text="←  Anterior", command=lambda: mostrar_letra(frame, letra_anterior)).place(relx=0.3, rely=0.9, anchor="center")
 
     if indice < len(abecedario) - 1:
         letra_siguiente = abecedario[indice + 1]
-        ctk.CTkButton(frame, text="Siguiente →", command=lambda: mostrar_letra(frame, letra_siguiente)).place(relx=0.7, rely=0.9, anchor="center")
-    ctk.CTkButton(frame, text="Ir al quiz").place(relx=.5, rely=.95, anchor="center")
+        ctk.CTkButton(frame, text="Siguiente  →", command=lambda: mostrar_letra(frame, letra_siguiente)).place(relx=0.7, rely=0.9, anchor="center")
+    

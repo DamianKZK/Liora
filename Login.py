@@ -8,17 +8,22 @@ ctk.set_default_color_theme("green")
 
 root = ctk.CTk()
 root.geometry("990x620")
-root.title("LIORA")
+root.iconbitmap("assets/LOGUITO.ico")
+root.title("Liora β")
 
-pestanas = ctk.CTkTabview(master=root, width=950, height=580)
-pestanas.place(relx=0.5, rely=0.49, anchor="center")
+pestanas = ctk.CTkTabview(master=root, width=990, height=620, #fg_color="#D7EAE9",
+                        segmented_button_fg_color="#7BA88F",  # Color de fondo de la barra
+                        segmented_button_selected_color="#31AB68",
+                        segmented_button_unselected_color="#7BA88F"
+)
+pestanas.pack(fill="both", expand=True)
+
 
 
 def verificarContrasena(pass1, pass2, user):
     if "Error" in pestanas._tab_dict:
         pestanas.delete("Error")
-    if pass1 != pass2:
-        pestanas.delete("Registro")   
+    if pass1 != pass2:   
         pestanas.add("Error")
         pestanas.set("Error")
         frame = pestanas.tab("Error")
@@ -36,8 +41,11 @@ def verificarContrasena(pass1, pass2, user):
         datos = {
             "usuario": user,
             "contraseña": pass1,
-            "nivel": 0,
-            "xp": 0
+            "quiz1": False,
+            "quiz2":False,
+            "quiz3":False,
+            "xp": 0,
+            "mltp":1
         }
         with open(ruta, "w", encoding="utf-8") as archivo:
             json.dump(datos, archivo, indent=4)
