@@ -58,10 +58,7 @@ def quiz1(frame, datos, pestanas, count, correctAns):
     MostrarLogo.Logo(frame, datos)
     
     abecedario = list("ABCDEFGHIJKLMNÑOPQRSTUVWXYZ")
-    letra1 = random.choice(abecedario)
-    letra2 = random.choice(abecedario)
-    letra3 = random.choice(abecedario)
-    letraCorrecta = random.choice(abecedario)
+    letra1, letra2, letra3, letraCorrecta = random.sample(abecedario, 4)
     
     listaLetras = [letra1, letra2, letra3, letraCorrecta]
 
@@ -69,13 +66,7 @@ def quiz1(frame, datos, pestanas, count, correctAns):
     ruta1 = f"assets/{letraCorrecta}.mp4"
     Reproductor.reproducir(frame, ruta1)
     
-    letraSel1 = random.choice(listaLetras)
-    listaLetras.remove(letraSel1)
-    letraSel2 = random.choice(listaLetras)
-    listaLetras.remove(letraSel2)
-    letraSel3 = random.choice(listaLetras)
-    listaLetras.remove(letraSel3)
-    letraSel4 = random.choice(listaLetras)
+    letraSel1, letraSel2, letraSel3, letraSel4 = random.sample(listaLetras, 4)
     
     ctk.CTkLabel(frame, text=f"Multiplicador de XP: x{mltp}", font= ("Segoe UI", 20)).place(relx=.13, rely=.18, anchor="center")
     ctk.CTkLabel(frame, text=f"Pregunta {count+1}/10", font= ("Segoe UI", 20, "bold")).place(relx=.87, rely=.18, anchor="center")

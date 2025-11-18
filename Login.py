@@ -3,7 +3,7 @@ import json
 import os
 import PantallaPrincipal
 
-ctk.set_appearance_mode("light")
+ctk.set_appearance_mode("default")
 ctk.set_default_color_theme("green")
 
 root = ctk.CTk()
@@ -12,9 +12,9 @@ root.iconbitmap("assets/LOGUITO.ico")
 root.title("Liora β")
 
 pestanas = ctk.CTkTabview(master=root, width=990, height=620, #fg_color="#D7EAE9",
-                        segmented_button_fg_color="#7BA88F",  # Color de fondo de la barra
-                        segmented_button_selected_color="#31AB68",
-                        segmented_button_unselected_color="#7BA88F"
+                        segmented_button_fg_color="#4FA776",  # Color de fondo de la barra
+                        segmented_button_selected_color="#15A656",
+                        segmented_button_unselected_color="#4FA776"
 )
 pestanas.pack(fill="both", expand=True)
 
